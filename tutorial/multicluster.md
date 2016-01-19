@@ -58,7 +58,7 @@ lrwxrwxrwx 1 root root   28 Oct  7 15:50 /var/mmfs/ssl/id_rsa.pub -> /var/mmfs/s
 
       mmauth genkey commit
 
-### 4.	Send the file id_rsa.pub to the people in your partner team
+### 4.	Send the file `id_rsa.pub` to the people in your partner team
 You can use email, usb stick, carrier pigeon, twitter or just scp:
       scp id_rsa.pub  <cluster2-node1>:/tmp/id_rsa.pub.<team #>
 
@@ -154,4 +154,9 @@ And finally try writing a file
 Ask the other team to see if the see this file in their GPFS filesystem and if so to edit it with vi and add a reply adding their own two names on a new line.
 
 Enjoy!
+
+References
+----------
+
+![IBM Spectrum Scale homepage](http://www-03.ibm.com/systems/uk/storage/spectrum/scale/)
 
