@@ -39,7 +39,7 @@ serial number = 657606986627
 ```
 
 Export the certificate as a file
-      wsadmin>print AdminTask.tklmCertExport('[-uuid CERTIFICATE-c00f107e-6970-44ff-9225-09c86c17dd85 -format base64 -fileName /root/srvcert]')
+      wsadmin> print AdminTask.tklmCertExport('[-uuid CERTIFICATE-c00f107e-6970-44ff-9225-09c86c17dd85 -format base64 -fileName /root/srvcert]')
 Output will be:
 ```
 CTGKM0001I Command succeeded.
