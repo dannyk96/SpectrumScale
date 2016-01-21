@@ -86,4 +86,5 @@ ISKLM_srv {
     Suspendisse id sem consectetuer libero luctus adipiscing.
     
     
-[GPFSInstall]: http://publib.boulder.ibm.com/epubs/pdf/a7604412.pdf "Spectrum Scale Installation Guide"
+[GPFSInstall_4.1.1]: http://publib.boulder.ibm.com/epubs/pdf/a7604412.pdf "Spectrum Scale 4.1.1 Installation Guide"
+[GPFSInstall]: https://www-01.ibm.com/support/knowledgecenter/api/content/nl/en-us/STXKQY_4.2.0/a7604414.pdf "Spectrum Scale 4.2 Installation Guide"
