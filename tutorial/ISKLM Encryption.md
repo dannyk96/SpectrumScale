@@ -22,6 +22,7 @@ WASX7031I: For help, enter: "print Help.help()"
 wsadmin>
 ```
 Show the certificate
+
       wasadmin> print AdminTask.tklmCertList('[-alias cert1_label]')
 Output will be 
 ```
@@ -39,6 +40,7 @@ serial number = 657606986627
 ```
 
 Export the certificate as a file
+
       wsadmin> print AdminTask.tklmCertExport('[-uuid CERTIFICATE-c00f107e-6970-44ff-9225-09c86c17dd85 -format base64 -fileName /root/srvcert]')
 Output will be:
 ```
