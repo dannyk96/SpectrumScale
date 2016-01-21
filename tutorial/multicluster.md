@@ -1,4 +1,4 @@
-LAB 6: Multi-Cluster : exporting a filesystem to anothre cluster
+LAB 6: Multi-Cluster : exporting a filesystem to another cluster
 ================================================================
 
 Before starting each lab open at least one window to each test node. Use man pages or the online documentation for detailed information on GPFS commands.
