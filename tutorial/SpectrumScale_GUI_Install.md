@@ -22,6 +22,16 @@ Proceedure
     rpm -i zimon_rpms/gpfs.gss.pmcollector-*.rpm
     rpm -i gpfs_rpms/gpfs.gui-*.rpm
 
+### Now can start the GUI
+
+No moitoring yet - we will setthat up later.
+
+Screenshot
+![GUI Splashscreed](GUI_splashseen.png)
+![jade manual markdown](http://f.cl.ly/items/3g1v2W213S2N390B201q/Screen%20Shot%202012-04-14%20at%201.54.35%20PM.png)
+
+>! Not ethat the above omage is still work in progress
+
 On nodes that can sense things (eg on an NSD server) install the package
 
     rpm -i ./zimon_rpms/gpfs.gss.pmsensors-4.2.0-0.el7.x86_64.rpm
