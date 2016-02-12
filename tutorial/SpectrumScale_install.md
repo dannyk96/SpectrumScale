@@ -51,6 +51,7 @@ Product rpms successfully extracted to /usr/lpp/mmfs/4.2.0.0
       To install a cluster manually:  Use the gpfs rpms located within /usr/lpp/mmfs/4.2.0.0/gpfs_rpms
 
 ** cut **
+```
 
 Now follow either of teh two methods for installing the software
 
@@ -59,6 +60,7 @@ Method 1: Install using the `spectrumscale` tool
 ------------------------------------------------
 
 First we change directory to the installer and check what our ip addres is
+
     cd /usr/lpp/mmfs/4.2.0.0/installer/
     hostname -i
 
