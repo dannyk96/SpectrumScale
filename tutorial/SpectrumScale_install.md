@@ -156,13 +156,13 @@ vdg           252:96   0    2G  0 disk
 ```
 Now add the first 2 disk drives
 
-    ./spectrumscale nsd add /dev/vdb -p frvm151  -fs scratch -u dataAndMetadata -po system
+    ./spectrumscale nsd add /dev/vdb -p frvm150  --s frvm151 fs scratch -u dataAndMetadata -po system
 ```
 [ INFO  ] Connecting to frvm151.platform to check devices and expand wildcards.
 [ INFO  ] The installer will create the new file system scratch if it does not exist.
 [ INFO  ] Adding NSD nsd1 on frvm151.platform using device /dev/vdb.
 ```
-    ./spectrumscale nsd add /dev/vdc -p frvm151  -fs scratch -u dataAndMetadata -po system
+    ./spectrumscale nsd add /dev/vdc -p frvm151 -s frvm150  -fs scratch -u dataAndMetadata -po system
 ```
 [ INFO  ] Connecting to frvm151.platform to check devices and expand wildcards.
 [ INFO  ] Adding NSD nsd2 on frvm151.platform using device /dev/vdc.
