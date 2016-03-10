@@ -156,7 +156,7 @@ vdg           252:96   0    2G  0 disk
 ```
 Now add the first 2 disk drives
 
-    ./spectrumscale nsd add /dev/vdb -p frvm150  --s frvm151 fs scratch -u dataAndMetadata -po system
+    ./spectrumscale nsd add /dev/vdb -p frvm150  --s frvm151 -fs scratch -u dataAndMetadata -po system
 ```
 [ INFO  ] Connecting to frvm151.platform to check devices and expand wildcards.
 [ INFO  ] The installer will create the new file system scratch if it does not exist.
@@ -175,7 +175,8 @@ and check
 [ INFO  ] nsd1 scratch 2        dataAndMetadata 1  system /dev/vdb [frvm151.platform]
 [ INFO  ] nsd2 scratch 2        dataAndMetadata 1  system /dev/vdc [frvm151.platform]
 ```
-
+NSDs will be created when the spectrumscale install command is issued.  
+The file system will be created when the spectrumscale deploy command is issued.
 
 ** Nore  need a ces_shared from say /dev/sdg for later use.
 
