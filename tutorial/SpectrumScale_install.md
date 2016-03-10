@@ -226,3 +226,27 @@ Step 1.10 Do the actual Install !
 
 Method 2: Manual Install 
 ------------------------
+
+
+### Check what has been installed
+    rpm -qa --queryformat '%20{NAME}   %-30{SUMMARY}\n' | grep -i gpfs |sort
+Output is similar to:
+```
+gpfs.adv               GPFS Advanced Features
+gpfs.base              GPFS File Manager
+gpfs.crypto            GPFS Cryptographic Subsystem
+gpfs.docs              GPFS Server Manpages and Documentation
+gpfs.ext               GPFS Extended Features
+gpfs.gpl               GPFS Open Source Modules
+gpfs.gskit             GPFS GSKit Cryptography Runtime
+gpfs.gss.pmcollector   ZIMonCollector - an in-memory database for collecting and storing performance metrics.
+gpfs.gss.pmsensors     ZIMonSensors -  the front-end of the ZIMon performance monitoring solution.
+gpfs.gui               GPFS Administration GUI
+gpfs.msg.en_US         GPFS Server Messages - U.S. English
+
+
+```
+
+
+    
+
