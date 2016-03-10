@@ -243,9 +243,34 @@ gpfs.gss.pmcollector   ZIMonCollector - an in-memory database for collecting and
 gpfs.gss.pmsensors     ZIMonSensors -  the front-end of the ZIMon performance monitoring solution.
 gpfs.gui               GPFS Administration GUI
 gpfs.msg.en_US         GPFS Server Messages - U.S. English
-
-
 ```
+
+#### Upgrading a cluster using teh 'SpectrumScale` tool
+
+see www-01.ibm.com/support/knowledgecenter/STXKQY_4.2.0/com.ibm.spectrum.scale.v4r2.ins.doc/bl1ins_upgradingtoolkit42.htm
+
+ If you have GPFS installed and have already used the install toolkit, follow these steps:
+
+   1 Copy the cluster definition file from your `/usr/lpp/mmfs/4.x.x.x/installer/configuration/clusterdefinition.txt` file to the newly extracted `/usr/lpp/mmfs/4.2.0.0/installer/configuration/clusterdefinition.txt` directory.
+   2  Ensure that the cluster definition file is accurate and reflects the current state of your Spectrum Scale cluster.
+      Proceed to the "spectrumscale upgrade command" section that follows.
+
+If you have no existing GPFS cluster and would like to use the install toolkit to install both GPFS and an update, follow these steps:
+
+   1 Copy the `/usr/lpp/mmfs/4.2.0.0/installer` directory (for example, `/usr/lpp/mmfs/4.2.0.0/installer` over the top of the `/usr/lpp/mmfs/4.2.0.0/installer` directory.
+   2 Complete defining your cluster definition file as explained in the following topics:
+        Defining configuration options for the spectrumscale installation toolkit
+        Setting up the install node
+   3 Run the spectrumscale install command to install GPFS. (See Installing GPFS.)
+   4 Copy the configuration/clusterdefinition.txt file from the location where you just ran the spectrumscale install command to `4.2.0.0/installer/configuration` (for example, `4.2.0.0/installer/configuration`).
+    5 Add nodes to ensure that the gpfs.base rpm is installed.
+    6 Proceed to upgrade GPFS (for example, to 4.x.x.x); see the "The spectrumscale upgrade command" section that follows.
+    7  Proceed to deploy protocols (if required) as explained in Deploying protocols.
+
+
+
+
+
 
 
     
