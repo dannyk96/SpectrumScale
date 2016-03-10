@@ -190,6 +190,19 @@ Step 1.10 Do the actual Install !
 
     ./spectrumscale install
     
+If you just want to do all the above you might want to simply cut and paste this set of commands
+```
+ ./spectrumscale setup -i ~/.ssh/id_rsa -s 10.3.64.150 --store
+ ./spectrumscale node add frvm150 -p
+
+ ./spectrumscale node add frvm151 -a -n -g
+ ./spectrumscale nsd add /dev/vdb -p frvm151  -fs scratch -u dataAndMetadata -po system
+ ./spectrumscale nsd add /dev/vdc -p frvm151  -fs scratch -u dataAndMetadata -po system
+? add to secondary nsd server ?
+ ./spectrumscale config gpfs -c treacle
+ ./spectrumscale install
+ ```
+
 
 
   (optional) You may be insterested to watch teh progress in another window
