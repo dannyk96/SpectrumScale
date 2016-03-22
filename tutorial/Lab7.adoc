@@ -24,6 +24,7 @@ In this lab you will be:
 
 Before you start:
 
+****
 Chose your *second* node as your Node that will have protocol service
 installed. (You set up NFS on node1 in Lab 4, and it would be best
 that we do not try to set up CES on that one.)  We will only install
@@ -32,6 +33,7 @@ that will have service installed (same as what we used for gpfs
 cluster creation). CES ip refers to extra ip that was provided to you
 for NFS service. Please write down below information so you can use it
 in commands.
+****
 
 Team #: __________
 
