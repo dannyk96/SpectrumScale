@@ -86,14 +86,14 @@ create a file system named `cesroot` mounted as `/gpfs/cesroot`.
 You can create your own stanza file, or start by copying the sample
 file:
 
-.........................................
+----
 # cp /gpfs-course/sample/cesnsd.txt /root
-.........................................
+----
 
 Edit the `cesnsd.txt` file to make it reflect your nodes.  When done,
 it should look like:
 
-.......................
+....
 %nsd: device=/dev/vdf
   nsd=ces01
   servers=frvm49,frvm50
@@ -105,7 +105,7 @@ it should look like:
   servers=frvm50,frvm49
   usage=dataAndMetadata
   failureGroup=2
-.......................
+....
 
 Create the NSDs:
 
