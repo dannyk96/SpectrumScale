@@ -3,6 +3,8 @@ Lab 7: Cluster Export Services (NFS)
 :Date: 2016 February 04
 :Revision: 2016.02
 
+:toc:
+
 (C) IBM 2016
 Spectrum Scale(TM)
 Objectives
