@@ -9,6 +9,8 @@ Lab 7: Cluster Export Services (NFS)
 
 (C) IBM 2016
 Spectrum Scale(TM)
+
+
 Objectives
 ----------
 
