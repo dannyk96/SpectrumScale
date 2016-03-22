@@ -3,7 +3,7 @@ Lab 7: Cluster Export Services (NFS)
 :Date: 2016 February 04
 :Revision: 2016.02
 
-:toc:
+:toc: right
 
 :numbered:
 
