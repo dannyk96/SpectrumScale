@@ -68,7 +68,7 @@ Preparing the cluster and nodes
 Step 1: Create a file system for CES Root
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-CES requires a file system that can be access by all other CES nodes.
+TIP: CES requires a file system that can be access by all other CES nodes.
 The best option is to create small Spectrum Scale file system to be
 used for this purpose. You will use your remaining block devices to
 create a file system named `cesroot` mounted as `/gpfs/cesroot`.
@@ -187,7 +187,7 @@ Finally, you can start NFS on all your protocol nodes:
 Step 6: Perform some basic checks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We just finished deploying protocol and enabling NFS service. Let's
+NOTE: We just finished deploying protocol and enabling NFS service. Let's
 check the setup with few commands.
 
 ​Check services running on the node: Note that NFS service is
