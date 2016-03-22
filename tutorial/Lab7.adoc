@@ -93,6 +93,7 @@ file:
 Edit the `cesnsd.txt` file to make it reflect your nodes.  When done,
 it should look like:
 
+[source,ruby] 
 ....
 %nsd: device=/dev/vdf
   nsd=ces01
