@@ -1,0 +1,263 @@
+Lab 7: Cluster Export Services (NFS)
+====================================
+:Date: 2016 February 04
+:Revision: 2016.02
+
+Objectives
+----------
+
+In this lab you will be:
+- setting up a Cluster Export Services Node (Protocol node) that will
+  be providing NFS service.
+- Create new file system for CES root (used by Protocol nodes to store
+  its data)
+- Deploy CES services
+- Enable NFS service
+
+Before you start:
+
+Chose your *second* node as your Node that will have protocol service
+installed. (You set up NFS on node1 in Lab 4, and it would be best
+that we do not try to set up CES on that one.)  We will only install
+CES on the single node. The host ip below refers to IP of the node
+that will have service installed (same as what we used for gpfs
+cluster creation). CES ip refers to extra ip that was provided to you
+for NFS service. Please write down below information so you can use it
+in commands.
+
+Team #: __________
+
+Host IP: ____.____.____
+
+Host name of the node that will be protocol node: _____________
+
+CES IP: ____.____.____
+
+
+One member per team will issue the commands below. Take turns to
+execute the commands.
+
+Setup note
+~~~~~~~~~~
+
+These labs must be completed before proceeding to this lab:
+- Lab 1
+
+File system and cluster
+^^^^^^^^^^^^^^^^^^^^^^^
+
+As with the other labs, we assume you have a file system `team<#>`
+mounted at `/gpfs/team<#>`.  For simplicity, we will assume you are
+team 0, with file system `team00` mounted at `/gpfs/team00`.
+
+Furthermore, we assume that your `/dev/vdf` and `/dev/vdg` devices are
+still available for use as an additional file system.  We will create
+that for this lab.
+
+Finally, in Lab 4, you may have started an NFS server on your "node1".
+That would interfere with the NFS protocol node, if we tried to also
+run that on "node1".  Instead, we will install the protocol node on
+your "node2".
+
+You will need to have at least one IP address through which the
+protocols are exported.  Let's call it `protoip`.
+
+Preparing the cluster and nodes
+-------------------------------
+
+Step 1: Create a file system for CES Root
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CES requires a file system that can be access by all other CES nodes.
+The best option is to create small Spectrum Scale file system to be
+used for this purpose. You will use your remaining block devices to
+create a file system named `cesroot` mounted as `/gpfs/cesroot`.
+
+You can create your own stanza file, or start by copying the sample
+file:
+
+.........................................
+# cp /gpfs-course/sample/cesnsd.txt /root
+.........................................
+
+Edit the `cesnsd.txt` file to make it reflect your nodes.  When done,
+it should look like:
+
+.......................
+%nsd: device=/dev/vdf
+  nsd=ces01
+  servers=frvm49,frvm50
+  usage=dataAndMetadata
+  failureGroup=1
+
+%nsd: device=/dev/vdg
+  nsd=ces02
+  servers=frvm50,frvm49
+  usage=dataAndMetadata
+  failureGroup=2
+.......................
+
+Create the NSDs:
+
+.............................
+# mmcrnsd -F cesnsd.txt -v no
+.............................
+
+Next, create the file system:
+
+.................................................................................
+# mmcrfs cesroot -F cesnsd.txt -T /gpfs/cesroot -B 1M -i 4096 -M 2 -m 2 -R 2 -r 2
+.................................................................................
+
+Finally, mount the `/gpfs/cesroot` file system on all nodes.
+
+....................
+# mmmount cesroot -a
+....................
+
+The cluster itself needs to be configured to know about the new `cesroot` file system:
+
+........................................
+# mmshutdown -a
+# mmchconfig cesSharedRoot=/gpfs/cesroot
+# mmstartup -a
+........................................
+
+
+Step 2: Install software on the node that will export protocols
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On you `node2`, install the necessary software to export NFS:
+
+.......................................
+# cd /usr/lpp/mmfs/4.2.0.0
+# yum install  ganesha_rpms/nfs-ganesha*.rpm smb_rpms/gpfs.smb*.rpm
+.......................................
+
+This may install some additional prerequistite RPMs.
+
+Step 3: Tell the cluster what the protocol nodes are
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now configure CES services to run on your node2:
+
+................................
+# mmchnode --ces-enable -N node2
+................................
+
+You can check what nodes are CES nodes, i.e., the protocol nodes in
+your cluster:
+
+...................
+# mmlscluster --ces
+...................
+
+
+Step 4: Configure the floating IP address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Configure your cluster to know which IP addresses may be used for
+protocols (the `protoip` address you were assigned):
+
+........................................
+# mmces address add --ces-ip protoip
+........................................
+
+You can check this address has been correctly entered:
+
+....................
+# mmces address list
+....................
+
+
+Start NFS
+---------
+
+
+Step 5: Activate the service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Finally, you can start NFS on all your protocol nodes:
+
+..........................
+# mmces service enable NFS
+..........................
+
+
+Step 6: Perform some basic checks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We just finished deploying protocol and enabling NFS service. Let's
+check the setup with few commands.
+
+​Check services running on the node: Note that NFS service is
+running. Take a note of distribution policy, IP address and enabled
+services.
+
+...................
+# mmlscluster --ces
+...................
+
+From your `node2`, check services running on the node. Note that NFS
+service is running.
+
+...................
+# mmces service list
+Enabled services: NFS
+NFS is running
+...................
+
+Check that nothing has yet actually been exported:
+
+.........................
+# mmnfs export list
+Path Delegations Clients 
+-------------------------
+
+.........................
+
+Export data
+-----------
+
+
+Step 7: Export some data
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's export file system so other VMs can mount your file system.
+
+First set authentication method.  We just use local OS authentication
+for file access protocols:
+
+........................................................................
+# mmuserauth service create --data-access-method file --type userdefined
+........................................................................
+
+Now export your file system:
+
+.......................................................................................
+# mmnfs export add /gpfs/team00 --client "node1 (ACCESS_TYPE=RW,SQUASH=no_root_squash)"
+# mmnfs export list
+Path         Delegations Clients 
+---------------------------------
+/gpfs/team00 none        node1  
+.......................................................................................
+
+Step 8: Mount NFS from a client
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Check that this worked.  On your `node1`, mount the NFS file system
+from your `protoip`:
+
+..........................................
+# mkdir /tmp/gpfs
+# mount protoip:/gpfs/team00 /tmp/gpfs
+..........................................
+
+Then you can check out the NFS volume you just mounted:
+
+..........................
+# cd /tmp/gpfs
+# ls
+# echo "Hello, world" > hw
+# cat hw
+..........................
