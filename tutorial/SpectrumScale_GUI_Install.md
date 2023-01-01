@@ -1,5 +1,5 @@
-Spectrum Scale GUi Install
-==========================
+Spectrum Scale GUI-based Install
+================================
 
 This section covers installing the GUI on a node.
 It assumes that the core Spectrum Scale RPMs have already been installed.
